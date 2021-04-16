@@ -28,7 +28,7 @@ module "vpc" {
 module "kubernetes" {
  source ="github.com/RohtangLa/terraform-aws-kubernetes"
  aws_region = "us-east-1"
- cluster_name = "${local.cluster_name}"I 
+ cluster_name = "${local.cluster_name}"
  master_instance_type = "t2.medium"
  worker_instance_type = "t2.medium"
  ssh_public_key       = "~/.ssh/id_rsa.pub"
