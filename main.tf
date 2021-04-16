@@ -4,14 +4,14 @@ terraform {
 }
 
 locals {
-     cluster_name ="niru-kube"
+     cluster_name ="first-kube"
      region = "us-east-1"
      vpc_name = "kube"
-     vpc_cidr = "10.0.0.0/16"
+     vpc_cidr = "10.0.0.0/24"
 }
 
 module "vpc" {
-    source = "github.com/Niranjan1016/terraform-aws-vpc"
+    source = "github.com/RohtangLa/terraform-aws-vpc"
     aws_region = "us-east-1"
     aws_zones = ["us-east-1a","us-east-1b","us-east-1c"]
     vpc_name = "${local.vpc_name}"
@@ -26,7 +26,7 @@ module "vpc" {
 }
 
 module "kubernetes" {
- source ="github.com/Niranjan1016/terraform-aws-kubernetes"
+ source ="github.com/RohtangLa/terraform-aws-kubernetes"
  aws_region = "us-east-1"
  cluster_name = "${local.cluster_name}"
  master_instance_type = "t2.medium"
@@ -36,7 +36,7 @@ module "kubernetes" {
  api_access_cidr      = ["0.0.0.0/0"]
  min_worker_count     = 2
  max_worker_count     = 3
- hosted_zone          = "kube-domain.com"
+ hosted_zone          = "learningcloud.com"
  hosted_zone_private  = "false"
 
  master_subnet_id = module.vpc.subnet_ids[0]
